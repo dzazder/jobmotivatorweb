@@ -1,0 +1,21 @@
+body {
+    padding: 40px;
+}
+
+.content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+span.result {
+    font-weight: bold;
+}
+
+div.result {
+    margin: 30px 0;
+}
+
+p.finish {
+    display: none;
+    font-weight: bold;
+}
