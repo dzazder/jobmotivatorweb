@@ -1,10 +1,6 @@
-body {
-    padding: 40px;
-}
-
 .content {
     max-width: 900px;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
 span.result {

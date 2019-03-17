@@ -1,5 +1,4 @@
 var paused = false;
-$('.clockpicker').clockpicker();
 
 function timer(ms) {
     return new Promise(res => setTimeout(res, ms));
