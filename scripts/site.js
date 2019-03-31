@@ -6,7 +6,6 @@ function timer(ms) {
 
 async function calc() {
     while (!paused) {
-        console.log("calc");
         var timeStart = $("#txtStart").val();
         var timeEnd = $("#txtEnd").val();
         var salary = $("#txtSalary").val();
@@ -42,32 +41,35 @@ async function calc() {
         var earnedMoneyFormatted = Math.round(earnedMoney * 100) / 100;
     
         if (worked < toWork) {
-            $("#progressTime")
-              .css("width", percentWorked + "%")
-              .attr("aria-valuenow", percentWorked)
-              .text(percentWorkedFormatted + "% Complete");
-        
-            $("#resWorkedHours").text(hoursWorked);
-            $("#resWorkedMinutes").text(minutesWorked);
-            $("#resWorkedPercent").text(percentWorkedFormatted);
-            $("#resEarnedMoney").text(earnedMoneyFormatted);
+            $("#finishInfo").hide();
+            $("#progressTime").removeClass("bg-success");
         }
         else {
             paused = true;
-    
-            $("#finishInfo").show();
-    
-            $("#progressTime").css("width", "100%").attr("aria-valuenow", 100).text("100% Complete");
-            $("#progressTime").addClass("bg-success");
-    
+
+            percentWorked = 100;
+            percentWorkedFormatted = 100;
             hoursWorked = Math.floor(toWork / 1000 / 60 / 60);
             minutesWorked = Math.floor(toWork / 1000 / 60) % 60;
+            earnedMoney = salary;
+            earnedMoneyFormatted = salary;
     
-            $("#resWorkedHours").text(hoursWorked);
-            $("#resWorkedMinutes").text(minutesWorked);
-            $("#resWorkedPercent").text(100);
-            $("#resEarnedMoney").text(salary);
+            $("#finishInfo").show();
+            $("#progressTime").addClass("bg-success");
         }
+
+        $("#progressTime")
+            .css("width", percentWorked + "%")
+            .attr("aria-valuenow", percentWorked)
+            .text(percentWorkedFormatted + "% Complete");
+    
+        $("#resWorkedHours").text(hoursWorked);
+        $("#resWorkedMinutes").text(minutesWorked);
+        $("#resWorkedPercent").text(percentWorkedFormatted);
+        $("#resEarnedMoney").text(earnedMoneyFormatted);
+
+        document.title = percentWorkedFormatted + "%";
+
         await timer(1000);
     }
 }
